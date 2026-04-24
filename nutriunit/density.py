@@ -1,47 +1,35 @@
-"""
-nutriunit.density
-
-A simple, extensible nutrient-density scoring engine.
-
-This module provides a minimal scoring function that compares a food's
-nutrient profile to a reference profile. The default method is a
-ratio-based score, but the design allows for future expansion to
-threshold-based scoring, weighting schemes, and uncertainty propagation.
-"""
-
+from nutriunit.profiles import get_profile
 from .utils import safe_divide, validate_positive
 
-
-def score(
-    nutrient_profile: dict,
-    reference_profile: dict,
-    method: str = "ratio",
-) -> float:
+def score(nutrient_profile, reference_profile, method="ratio"):
     """
-    Compute a nutrient-density score.
+    Compute nutrient density score for a food.
 
     Parameters
     ----------
     nutrient_profile : dict
-        A mapping of nutrient name -> amount in the food item.
-    reference_profile : dict
-        A mapping of nutrient name -> recommended or reference amount.
+        Nutrient composition of the food.
+    reference_profile : dict or str
+        Either a nutrient reference profile dictionary,
+        or the name of a profile registered in PROFILE_REGISTRY.
     method : str
-        Scoring method. Currently supports:
-            - "ratio": sum(food / reference) across shared nutrients.
+        Scoring method (currently only "ratio" is implemented).
 
     Returns
     -------
     float
-        A nutrient-density score (higher = more nutrient-dense).
-
-    Notes
-    -----
-    - Only nutrients present in BOTH profiles are used.
-    - Missing nutrients are ignored rather than penalised.
-    - safe_divide ensures stable behaviour when reference values are zero.
+        The nutrient density score.
     """
 
+    # NEW: allow profile names
+    if isinstance(reference_profile, str):
+        reference_profile = get_profile(reference_profile)
+
+    # Validate
+    if not isinstance(reference_profile, dict):
+        raise TypeError("reference_profile must be a dict or a registered profile name")
+
+    # --- existing scoring logic ---
     if method != "ratio":
         raise ValueError(f"Unsupported scoring method: {method}")
 
@@ -52,7 +40,6 @@ def score(
             continue
 
         ref_value = reference_profile[nutrient]
-
         validate_positive(ref_value, name=f"reference value for {nutrient}")
 
         ratio = safe_divide(value, ref_value, default=0.0)
