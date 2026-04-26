@@ -22,7 +22,7 @@ pip install -e .[dev]
 
 # PyPI installation will be available once the package reaches its first release.
 
-## [Quick Start
+## Quick Start
 
 from nutriunit import converter as nu
 
