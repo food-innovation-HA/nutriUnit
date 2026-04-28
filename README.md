@@ -6,10 +6,12 @@ nutriUnit is a small, research‑friendly application designed to help users bui
 
 This version (v0.2) focuses on clarity, transparency, and ease of experimentation rather than prescribing a single “correct” nutrient metric.
 ✨ Key Features (v0.2)
-1. Custom nutrient profiles
+
+## 1. Custom nutrient profiles
 
 Select nutrients to encourage or limit, assign weights, and optionally start from a population‑level base profile.
-2. Predefined scoring models
+
+## 2. Predefined scoring models
 
 Includes several commonly used nutrient density frameworks:
 
@@ -20,22 +22,28 @@ Includes several commonly used nutrient density frameworks:
     “None” (fully custom)
 
 These models act as templates — users can modify them freely.
-3. Fuzzy food search
+
+## 3. Fuzzy food search
 
 Search the McCance & Widdowson dataset using approximate matching (e.g., “app” → “Apple, raw”).
-4. Nutrient composition viewer
+
+## 4. Nutrient composition viewer
 
 Displays the full nutrient profile (per 100 g) for any selected food.
-5. Radar chart visualisation
+
+## 5. Radar chart visualisation
 
 Interactive Plotly radar chart showing the nutrient “shape” of the selected food.
-6. Nutrient density scoring
+
+## 6. Nutrient density scoring
 
 Compute a simple ratio‑based nutrient density score using your constructed profile.
-7. Score breakdown
+
+## 7. Score breakdown
 
 See how each nutrient contributes to the final score, including a bar chart for quick interpretation.
-8. CSV export
+
+## 8. CSV export
 
 Download a structured CSV containing:
 
@@ -45,7 +53,7 @@ Download a structured CSV containing:
     weights
     final score
 
-Useful for teaching, reproducibility, and downstream analysis.
+## Useful for teaching, reproducibility, and downstream analysis.
 🧠 How it works (in brief)
 
 nutriUnit builds a nutrient profile by combining:
@@ -60,7 +68,8 @@ Code
 score = Σ ( food_nutrient / reference_value )
 
 This is not intended as a final or authoritative nutrient density metric — it’s a transparent starting point for exploring how different assumptions influence results.
-📦 Installation
+
+## 📦 Installation
 Code
 
 pip install -r requirements.txt
@@ -70,7 +79,7 @@ Code
 
 pip install plotly
 
-▶️ Running the app
+## ▶️ Running the app
 Code
 
 streamlit run app.py
@@ -80,7 +89,7 @@ Code
 
 http://localhost:8501
 
-🗺️ Roadmap
+## 🗺️ Roadmap
 
 Planned for v0.3 and beyond:
 
@@ -91,7 +100,7 @@ Planned for v0.3 and beyond:
     optional energy adjustment
     exportable plots
 
-👥 Contributors
+## 👥 Contributors
 
 Developed at Harper Adams University as part of ongoing work on nutrient functional units, sustainability metrics, and teaching tools.
 
