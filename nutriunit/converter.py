@@ -19,3 +19,11 @@ def kcal_to_kj(value: float) -> float:
 
 def kj_to_kcal(value: float) -> float:
     return value / 4.184
+
+from .food_item import FoodItem
+
+def get_nutrient(food: FoodItem, nutrient: str):
+    """
+    Retrieve a nutrient value from a FoodItem using internal nutrient names.
+    """
+    return getattr(food, nutrient, None)

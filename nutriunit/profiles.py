@@ -238,3 +238,11 @@ def all_nutrients():
     for profile in PROFILE_REGISTRY.values():
         nutrients.update(profile.keys())
     return sorted(nutrients)
+
+from .nutrients import NUTRIENTS
+
+def list_available_nutrients():
+    """
+    Return the canonical list of nutrient names used internally.
+    """
+    return list(NUTRIENTS.keys())
