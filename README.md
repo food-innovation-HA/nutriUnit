@@ -1,54 +1,98 @@
-## nutriUnit
+nutriUnit — Nutrient Functional Unit Builder
 
-A small, practical toolkit for nutrient‑unit conversions and nutrient‑density calculations.
+A lightweight, flexible tool for exploring nutrient density models using McCance & Widdowson data.
 
-nutriUnit provides a straightforward Python interface for converting nutrient units, normalising values, and preparing data for nutrient‑density scoring. It is designed to support teaching, research, and reproducible food‑systems modelling, without the overhead of a full nutrition‑analysis framework.
+nutriUnit is a small, research‑friendly application designed to help users build, test, and compare nutrient functional units. It supports both predefined nutrient density models and fully custom scoring profiles, making it useful for teaching, exploratory analysis, and early‑stage methodological development.
 
-## Features
+This version (v0.2) focuses on clarity, transparency, and ease of experimentation rather than prescribing a single “correct” nutrient metric.
+✨ Key Features (v0.2)
+1. Custom nutrient profiles
 
-    Unit conversions (e.g. grams ↔  milligrams, kilocalories ↔  kilojoules)
-    Normalisation helpers (per 100 g, per serving, per MJ)
-    Simple nutrient‑density scoring primitives
-    A composable API suitable for LCA, nutrition modelling, and teaching
-    Tested, version‑controlled, and packaged using modern Python standards
+Select nutrients to encourage or limit, assign weights, and optionally start from a population‑level base profile.
+2. Predefined scoring models
 
-## Installation
+Includes several commonly used nutrient density frameworks:
 
-Development installation:
+    NRF9(.3)
+    LIM3
+    Priority Micronutrient Value (PMV)
+    UK Nutritional Index (ASF)
+    “None” (fully custom)
 
-git clone git@github.com:food-innovation-HA/nutriUnit.git
-cd nutriUnit
-pip install -e .[dev]
+These models act as templates — users can modify them freely.
+3. Fuzzy food search
 
-# PyPI installation will be available once the package reaches its first release.
+Search the McCance & Widdowson dataset using approximate matching (e.g., “app” → “Apple, raw”).
+4. Nutrient composition viewer
 
-## Quick Start
+Displays the full nutrient profile (per 100 g) for any selected food.
+5. Radar chart visualisation
 
-from nutriunit import converter as nu
+Interactive Plotly radar chart showing the nutrient “shape” of the selected food.
+6. Nutrient density scoring
 
-nu.grams_to_milligrams(2.5)   # 2500
-nu.milligrams_to_grams(750)   # 0.75
+Compute a simple ratio‑based nutrient density score using your constructed profile.
+7. Score breakdown
 
-## Planned functionality:
+See how each nutrient contributes to the final score, including a bar chart for quick interpretation.
+8. CSV export
 
-from nutriunit import density
-density.score(food_item, reference_profile="EFSA")
+Download a structured CSV containing:
 
-## Roadmap
+    selected food
+    nutrient composition
+    constructed profile
+    weights
+    final score
 
-    [ ] Full nutrient‑conversion matrix
-    [ ] Nutrient‑density scoring module
-    [ ] Uncertainty‑propagation hooks
-    [ ] Example notebooks for teaching
-    [ ] Documentation site (MkDocs)
-    [ ] GitHub Actions CI
-    [ ] PyPI release
+Useful for teaching, reproducibility, and downstream analysis.
+🧠 How it works (in brief)
 
-## Contributing
+nutriUnit builds a nutrient profile by combining:
 
-Contributions are welcome.
-For substantial changes, please open an issue to discuss the proposal first.
+    encourage nutrients (positive weights)
+    limit nutrients (negative weights)
+    optional base profiles (currently placeholders)
 
-## License
+The scoring method is intentionally simple:
+Code
 
-MIT License.
+score = Σ ( food_nutrient / reference_value )
+
+This is not intended as a final or authoritative nutrient density metric — it’s a transparent starting point for exploring how different assumptions influence results.
+📦 Installation
+Code
+
+pip install -r requirements.txt
+
+Ensure you have Plotly installed for visualisation:
+Code
+
+pip install plotly
+
+▶️ Running the app
+Code
+
+streamlit run app.py
+
+The app will open in your browser at:
+Code
+
+http://localhost:8501
+
+🗺️ Roadmap
+
+Planned for v0.3 and beyond:
+
+    fully populated WHO/FAO base profiles
+    normalisation options
+    multi‑food comparison
+    improved nutrient filtering
+    optional energy adjustment
+    exportable plots
+
+👥 Contributors
+
+Developed at Harper Adams University as part of ongoing work on nutrient functional units, sustainability metrics, and teaching tools.
+
+Contributions, suggestions, and issue reports are warmly welcomed.
